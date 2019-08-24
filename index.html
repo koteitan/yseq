@@ -5,19 +5,10 @@
 convert=function(str){
   o="";s=str.split(/,/); p=new Array(s.length);
   for(i=0;i<s.length;i++){s[i]=parseInt(s[i]);p[i]=i-1;}r=0;
-  do{
-    f=0;for(i=s.length-1;i>=0;i--){
-      o=s[i]+','+o;
-      for(a=p[i];a>=0;a=p[a]){
-        if(s[a]<s[i]){
-          p[i]=a-1;s[i]=s[i]-s[a];f=1;break;
-        }
-      }
-      if(a<0)p[i]=-1;
-    }
-    o="<br>"+"&nbsp;".repeat(r++)+o;s=s.splice(1,s.length);
-    p=p.splice(1,p.length);
-  }while(f); return o;
+  do{f=0;for(i=s.length-1;i>=0;i--){o=s[i]+','+o;
+    for(a=p[i];a>=0;a=p[a]){if(s[a]<s[i]){p[i]=a-1;s[i]=s[i]-s[a];f=1;break;}}if(a<0)p[i]=-1;
+  }o="<br>"+"&nbsp;".repeat(r++)+o;s=s.splice(1,s.length);p=p.splice(1,p.length);
+  }while(f);return o;
 };
 
 window.onload=function(){
@@ -35,5 +26,5 @@ Y-sequence difference sequence calculator
 <tr><td colspan=2 style="text-align:center">Å´</td></tr>
 <tr><td>Difference sequences:</td><td><span id=out style="color:blue;font-family:monospace"></td></tr>
 </table></form>
-<pre id=code></pre>
+<pre id=code style="border-style:solid;border-width:1px"></pre>
 </body></html>
