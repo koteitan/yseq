@@ -1,0 +1,39 @@
+<html><head><title>Y-sequence</title>
+<meta http-equiv="Content-type" content="text/html; charset=sjis">
+<script type="text/javascript"><!--
+
+convert=function(str){
+  o="";s=str.split(/,/); p=new Array(s.length);
+  for(i=0;i<s.length;i++){s[i]=parseInt(s[i]);p[i]=i-1;}r=0;
+  do{
+    f=0;for(i=s.length-1;i>=0;i--){
+      o=s[i]+','+o;
+      for(a=p[i];a>=0;a=p[a]){
+        if(s[a]<s[i]){
+          p[i]=a-1;s[i]=s[i]-s[a];f=1;break;
+        }
+      }
+      if(a<0)p[i]=-1;
+    }
+    o="<br>"+"&nbsp;".repeat(r++)+o;s=s.splice(1,s.length);
+    p=p.splice(1,p.length);
+  }while(f); return o;
+};
+
+window.onload=function(){
+  document.getElementById('code').innerHTML=convert.toString().replace(/\>/g,"&gt;").replace(/\</g,"&lt;");
+  document.getElementById('out').innerHTML=convert(f.in.value);
+}
+
+//--></script>
+
+</head><body>
+Y-sequence difference sequence calculator
+<form name=f>
+<table>
+<tr><td>Y-sequence:</td><td><input type=text name=in size=80 onkeyup="document.getElementById('out').innerHTML=convert(f.in.value);" value="1,2,4,8,9,8"></td></tr>
+<tr><td colspan=2 style="text-align:center">↓</td></tr>
+<tr><td>Difference sequences:</td><td><span id=out style="color:blue;font-family:monospace"></td></tr>
+</table></form>
+<pre id=code></pre>
+</body></html>
